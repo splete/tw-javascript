@@ -28,6 +28,8 @@ application.TextField = function (conteneur, name, _parent, type, parameters) {
 	var textField=domHelp.addElement(newLine,"input","type",type);
 	if (parameters.hint)
 		textField.setAttribute("placeholder",parameters.hint);
+	if (parameters.id)
+		textField.setAttribute("id",parameters.id);
 	
 	var objetthis = this;
 
@@ -63,7 +65,6 @@ application.ButtonField = function (conteneur, name, _parent, parameters) {
 	if (parameters.onclick)
 		buttonField.setAttribute("onclick", parameters.onclick);
 	buttonField.setAttribute("value", _name);
-
 }
 
 application.ButtonField.prototype = {
@@ -71,10 +72,12 @@ application.ButtonField.prototype = {
 }
 
 application.Hunt = function () {
+	huntthis = this;
 	name = this.setName();
 	console.log(name);
 	this.questions = {};
 	screeen = new application.Screeen("New Teasure Hunt : " + name)
+	this.addQuestion();
 }
 
 application.Hunt.prototype = {
@@ -82,10 +85,29 @@ application.Hunt.prototype = {
 		return screeen.getPrompt('What is its name?');
 	},
 	addQuestion : function () {
-		
+		screeen.addTextField("question", {label : "Write the question", id : "question"});
+		screeen.addTextField("answer", {label : "Enter the code", id : "answer"});
+		screeen.addButtonField("Next", { onclick : "huntthis.nextQuestion();" });
+		screeen.addButtonField("Finish", { onclick : "huntthis.finishHunt();" });
 	},
-	saveHunt : function () {
-		
+	nextQuestion : function () {
+		var question = document.getElementById("question").value;
+		var answer = document.getElementById("answer").value;
+		console.log('On check les champs questions/réponses -> on ne fait rien si pas correct!');
+		if (question.length < 1) {
+			screeen.makeAlert("Write a question first!");
+			return;
+		}
+		if (answer.length < 1 || isNaN(answer)) {
+			screeen.makeAlert("Wrong answer, must be a number");
+			return;
+		}
+		console.log('Sauvegarder la question, puis nouveau formulaire de question')
+		screeen.makeAlert('next question!');
+	},
+	finishHunt : function () {
+		console.log('enregistrer la chasse!')
+		screeen.makeAlert('finish Hunt');
 	}
 }
 
@@ -129,6 +151,9 @@ application.Screeen.prototype = {
 	},
 	getPrompt : function (text) {
 		return prompt(text);
+	},
+	makeAlert : function(text) {
+		alert(text);
 	}
 }
 
