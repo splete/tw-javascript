@@ -74,18 +74,23 @@ application.Hunt = function () {
 	name = this.setName();
 	console.log(name);
 	this.questions = {};
+	screeen = new application.Screeen("New Teasure Hunt : " + name)
 }
 
 application.Hunt.prototype = {
 	setName : function () {
-		return prompt('What is its name?');
+		return screeen.getPrompt('What is its name?');
 	},
 	addQuestion : function () {
-
+		
 	},
 	saveHunt : function () {
 		
 	}
+}
+
+application.Question = function () {
+
 }
 
 application.Screeen = function (title) {
@@ -121,7 +126,10 @@ application.Screeen.prototype = {
 	},
 	addButtonField : function (name, parameters) {
 		this.fields[name]=new application.ButtonField(this, name, this.body,parameters);
-	}	
+	},
+	getPrompt : function (text) {
+		return prompt(text);
+	}
 }
 
 
