@@ -93,16 +93,23 @@ application.Hunt.prototype = {
 	saveQuestion : function (questionRequiered) {
 		var question = document.getElementById("question").value;
 		var answer = document.getElementById("answer").value;
+		var qSave = true;
 		console.log('On check les champs questions/réponses -> on ne fait rien si pas correct!');
 		if (question.length < 1) {
-			screeen.makeAlert("Write a question first!");
-			return;
+			if (questionRequiered) {
+				screeen.makeAlert("Write a question first!");
+				return;
+			}
+			qSave = false;
 		}
 		if (answer.length < 1 || isNaN(answer)) {
-			screeen.makeAlert("Wrong answer, must be a number");
-			return;
+			if (questionRequiered) {
+				screeen.makeAlert("Wrong answer, must be a number");
+				return;
+			}
+			qSave = false;
 		}
-		console.log('Save question');
+		qSave?console.log('Save question'):console.log('Question not save');
 	},
 	nextQuestion : function () {
 		console.log('Click next');
