@@ -74,6 +74,7 @@ application.ButtonField.prototype = {
 application.Hunt = function () {
 	huntthis = this;
 	this.name = this.setName();
+	this.qNumber = 0;
 	console.log(this.name);
 	this.questions = {};
 	this.addQuestion();
@@ -109,7 +110,12 @@ application.Hunt.prototype = {
 			}
 			qSave = false;
 		}
-		qSave?console.log('Save question'):console.log('Question not save');
+		if (qSave) {
+			this.qNumber++;
+			console.log('Save question ' + this.qNumber);
+		} else {
+			console.log('Question not save');
+		}
 	},
 	nextQuestion : function () {
 		console.log('Click next');
@@ -121,13 +127,22 @@ application.Hunt.prototype = {
 		huntthis.saveQuestion(false);
 		console.log('Enregistrer la chasse!')
 		screeen.makeAlert('finish Hunt');
+		localStorage['test'] = this;
 		screeen = new application.Screeen("New Teasure Hunt");
 		screeen.showListHunt();
+	},
+	toJson : function () {
+		return;
 	}
 }
 
-application.Question = function () {
-
+application.Question = function (question, answer) {
+	var _question = question;
+	var _answer = answer;
+	this.__defineGetter__("question", function () {return _question;});
+	this.__defineSetter__("question", function (value) {return _question = value;});
+	this.__defineGetter__("answer", function () {return _answer;});
+	this.__defineSetter__("answer", function (value) {return _answer = value;});
 }
 
 application.Screeen = function (title) {
