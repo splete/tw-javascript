@@ -23,7 +23,7 @@ application.TextField = function (conteneur, name, _parent, type, parameters) {
 
 	var label=domHelp.addElement(newLine,"span");
 	var labelText=domHelp.addText(label,(parameters.label?parameters.label:""));
-	ttt=labelText;
+	//ttt=labelText;
 
 	var textField=domHelp.addElement(newLine,"input","type",type);
 	if (parameters.hint)
@@ -73,10 +73,9 @@ application.ButtonField.prototype = {
 
 application.Hunt = function () {
 	huntthis = this;
-	name = this.setName();
-	console.log(name);
+	this.name = this.setName();
+	console.log(this.name);
 	this.questions = {};
-	screeen = new application.Screeen("New Teasure Hunt : " + name)
 	this.addQuestion();
 }
 
@@ -85,12 +84,13 @@ application.Hunt.prototype = {
 		return screeen.getPrompt('What is its name?');
 	},
 	addQuestion : function () {
+		screeen = new application.Screeen("New Teasure Hunt : " + this.name);
 		screeen.addTextField("question", {label : "Write the question", id : "question"});
 		screeen.addTextField("answer", {label : "Enter the code", id : "answer"});
 		screeen.addButtonField("Next", { onclick : "huntthis.nextQuestion();" });
 		screeen.addButtonField("Finish", { onclick : "huntthis.finishHunt();" });
 	},
-	nextQuestion : function () {
+	saveQuestion : function (questionRequiered) {
 		var question = document.getElementById("question").value;
 		var answer = document.getElementById("answer").value;
 		console.log('On check les champs questions/réponses -> on ne fait rien si pas correct!');
@@ -102,12 +102,19 @@ application.Hunt.prototype = {
 			screeen.makeAlert("Wrong answer, must be a number");
 			return;
 		}
-		console.log('Sauvegarder la question, puis nouveau formulaire de question')
-		screeen.makeAlert('next question!');
+		console.log('Save question');
+	},
+	nextQuestion : function () {
+		console.log('Click next');
+		huntthis.saveQuestion(true);
+		huntthis.addQuestion();
 	},
 	finishHunt : function () {
-		console.log('enregistrer la chasse!')
+		console.log('Click finish');
+		huntthis.saveQuestion(false);
+		console.log('Enregistrer la chasse!')
 		screeen.makeAlert('finish Hunt');
+		screeen = new application.Screeen("New Teasure Hunt");
 	}
 }
 
@@ -116,6 +123,7 @@ application.Question = function () {
 }
 
 application.Screeen = function (title) {
+	console.log('New screen');
 	this.body=document.getElementsByTagName("body").item(0);
 	for (var i=0;this.body.childNodes.length;i++)
 		this.body.removeChild(this.body.childNodes.item(0));
