@@ -115,6 +115,7 @@ application.Hunt.prototype = {
 		console.log('Enregistrer la chasse!')
 		screeen.makeAlert('finish Hunt');
 		screeen = new application.Screeen("New Teasure Hunt");
+		screeen.showListHunt();
 	}
 }
 
@@ -162,11 +163,14 @@ application.Screeen.prototype = {
 	},
 	makeAlert : function(text) {
 		alert(text);
+	},
+	showListHunt : function () {
+		this.addButtonField ("Create a teaser Hunt", { onclick : "new application.Hunt()" });
 	}
-}
 
+}
 
 window.onload = function () {
 	screeen=new application.Screeen("Treasure Hunt");
-	screeen.addButtonField ("Create a teaser Hunt", { onclick : "new application.Hunt()" });
+	screeen.showListHunt();
 }
