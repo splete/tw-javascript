@@ -1,6 +1,6 @@
 application = {};
 
-/* Fonction permettant d'import un fichier javascript : path*/
+/* Fonction permettant d'importer un fichier javascript : path*/
 function importJSFile (path) {
 	var imported = document.createElement('script');
 	imported.src = path;
