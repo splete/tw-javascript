@@ -18,7 +18,35 @@ application.HuntModel.prototype = {
 		return this.questions[indice];
 	},
 	storeModel : function () {
+		/* on fabrique un joli objet json contenant toutes les infos qui faut :) */
+		var jsonText = this.toJson();
 		/* on store le model dans le local storage */
+		localStorage[this.name] = jsonText;
+
+	},
+	toJson : function () {
+		var jsonText = '';
+		/* on ouvre le json */
+		jsonText += '{';
+		/* on ajout le nom */
+		jsonText += '"name":"'+this.name+'",';
+
+		if (this.questions.length > 0) {
+			jsonText += '"questions":[';
+
+			/* on ajoute toutes les questions */
+			for(var i=0; i<this.questions.length; i++) {
+				jsonText += '{"q":"'+this.questions[i].question+'",';
+				jsonText += '"a":"'+this.questions[i].answer+'"}';
+				if (i<this.questions.length-1) jsonText += ",";
+			}
+
+			jsonText += ']';
+		}
+
+		jsonText += '}';
+
+		return jsonText;
 	},
 	showAllQuestions : function () {
 		for (var i=0; i<this.questions.length; i++) {
