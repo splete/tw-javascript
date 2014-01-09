@@ -1,6 +1,10 @@
 application.Hunt = function () {
 	huntthis = this;
+
 	this.name = this.setName();
+	/* On cré un model */
+	model = new application.HuntModel(this.name);
+
 	this.qNumber = 0;
 	console.log(this.name);
 	this.questions = {};
@@ -38,8 +42,13 @@ application.Hunt.prototype = {
 			qSave = false;
 		}
 		if (qSave) {
+			console.log('Quetion ' + this.qNumber + ' ok');
+			var questionM = new application.Question(question, answer);
+			model.addQuestion(questionM);
+
 			this.qNumber++;
-			console.log('Save question ' + this.qNumber);
+			
+
 		} else {
 			console.log('Question not save');
 		}
@@ -53,8 +62,13 @@ application.Hunt.prototype = {
 		console.log('Click finish');
 		huntthis.saveQuestion(false);
 		console.log('Enregistrer la chasse!')
-		screeen.makeAlert('finish Hunt');
-		localStorage['test'] = this;
+		//screeen.makeAlert('finish Hunt');
+		
+
+		model.showAllQuestions();
+
+		model.storeModel();
+
 		screeen = new application.Screeen("New Teasure Hunt");
 		screeen.showListHunt();
 	},

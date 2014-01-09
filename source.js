@@ -10,6 +10,7 @@ function importJSFile (path) {
 /* On importe les fichiers sources */
 importJSFile("fields.js");
 importJSFile("domHelp.js");
+importJSFile("huntModel.js");
 importJSFile("hunt.js");
 importJSFile("question.js");
 importJSFile("screeen.js");
