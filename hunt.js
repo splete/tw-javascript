@@ -27,16 +27,9 @@ application.Hunt.prototype = {
 		var answer = document.getElementById("answer").value;
 		var qSave = true;
 		console.log('On check les champs questions/réponses -> on ne fait rien si pas correct!');
-		if (question.length < 1) {
+		if (question.length < 1 || answer.length < 1 || isNaN(answer)) {
 			if (questionRequiered) {
-				screeen.makeAlert("Write a question first!");
-				return;
-			}
-			qSave = false;
-		}
-		if (answer.length < 1 || isNaN(answer)) {
-			if (questionRequiered) {
-				screeen.makeAlert("Wrong answer, must be a number");
+				screeen.makeAlert("Not a question or answer is not a number");
 				return;
 			}
 			qSave = false;
@@ -45,10 +38,7 @@ application.Hunt.prototype = {
 			console.log('Quetion ' + this.qNumber + ' ok');
 			var questionM = new application.Question(question, answer);
 			model.addQuestion(questionM);
-
 			this.qNumber++;
-			
-
 		} else {
 			console.log('Question not save');
 		}
