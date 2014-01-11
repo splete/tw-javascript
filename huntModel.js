@@ -3,9 +3,17 @@ application.HuntModel = function (name, jsonObject) {
 	var _name = name;
 	this.__defineGetter__("name", function () {return _name;});
 	this.__defineSetter__("name", function (value) {return _name = value;});
-	/* Ici, on regarde si le jsonObject est la, ou pas, et on charge les questions en consequence */
+
 	this.name = _name;
 	this.questions = [];
+	
+	/* Ici, on regarde si le jsonObject est la, ou pas, et on charge les questions en consequence */
+	if (typeof(jsonObject) != 'undefined') {
+		for (var i=0; i<jsonObject["questions"].length; i++) {
+			var q = new application.Question(jsonObject["questions"][i]["q"],jsonObject["questions"][i]["a"])
+			this.questions[i] = q;
+		}
+	}
 }
 
 application.HuntModel.prototype = {
@@ -16,6 +24,9 @@ application.HuntModel.prototype = {
 	},
 	getQuestion : function (indice) {
 		return this.questions[indice];
+	},
+	getNbQuestions : function () {
+		return this.questions.length;
 	},
 	storeModel : function () {
 		/* on fabrique un joli objet json contenant toutes les infos qui faut :) */

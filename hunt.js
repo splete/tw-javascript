@@ -61,6 +61,7 @@ application.Hunt.prototype = {
 
 		screeen = new application.Screeen("New Teasure Hunt");
 		screeen.showCreationHunt();
+		screeen.showListHunt();
 	},
 	toJson : function () {
 		return;
