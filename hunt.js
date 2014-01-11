@@ -60,7 +60,7 @@ application.Hunt.prototype = {
 		model.storeModel();
 
 		screeen = new application.Screeen("New Teasure Hunt");
-		screeen.showListHunt();
+		screeen.showCreationHunt();
 	},
 	toJson : function () {
 		return;

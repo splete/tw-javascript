@@ -39,8 +39,13 @@ application.Screeen.prototype = {
 	makeAlert : function(text) {
 		alert(text);
 	},
+	showCreationHunt : function () {
+		this.addButtonField ("Create a Treasure Hunt", { onclick : "new application.Hunt()" });
+	},
 	showListHunt : function () {
-		this.addButtonField ("Create a teaser Hunt", { onclick : "new application.Hunt()" });
+		for (var key in localStorage) {
+			this.addButtonField(key, { onclick : "new application.PlayHunt('" + key + "');"});
+		}
 	}
 
 }
