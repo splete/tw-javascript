@@ -17,8 +17,8 @@ application.Hunt.prototype = {
 	},
 	addQuestion : function () {
 		screeen = new application.Screeen("New Teasure Hunt : " + this.name);
-		screeen.addTextField("question", {label : "Write the question", id : "question"});
-		screeen.addTextField("answer", {label : "Enter the code", id : "answer"});
+		screeen.addTextField("question", {hint : "Write the question", id : "question"});
+		screeen.addTextField("answer", {hint : "Enter the code", id : "answer"});
 		screeen.addButtonField("Next", { onclick : "huntthis.nextQuestion();" });
 		screeen.addButtonField("Finish", { onclick : "huntthis.finishHunt();" });
 	},

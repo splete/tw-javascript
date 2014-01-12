@@ -1,9 +1,16 @@
+application.Field = function () {
+
+}
+
+
 application.TextField = function (conteneur, name, _parent, type, parameters) {
 	var _name = name;
 	var parent = _parent;
 	var newLine=domHelp.addElement(parent,"p");
+	newLine.style.textAlign="center";
 
 	var label=domHelp.addElement(newLine,"span");
+	label.style.fontSize="20px";
 	var labelText=domHelp.addText(label,(parameters.label?parameters.label:""));
 	//ttt=labelText;
 
@@ -31,6 +38,8 @@ application.TextField = function (conteneur, name, _parent, type, parameters) {
 		_name = value;
 		conteneur.fields[_name] = objetthis;
 	});
+
+	screeen.setStyleTextField(textField);
 }
 
 application.TextField.prototype = {
@@ -50,6 +59,8 @@ application.ButtonField = function (conteneur, name, _parent, parameters) {
 		});
 	}
 	buttonField.setAttribute("value", _name);
+
+	screeen.setStyleButton(buttonField);
 }
 
 application.ButtonField.prototype = {

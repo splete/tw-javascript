@@ -29,9 +29,11 @@ application.Screeen.prototype = {
 	},
 	addTextField : function (name, parameters) {
 		this.fields[name]=new application.TextField(this, name, this.body,"text",parameters);
+		var style = this.fields[name].style;
 	},
 	addButtonField : function (name, parameters) {
 		this.fields[name]=new application.ButtonField(this, name, this.body,parameters);
+
 	},
 	getPrompt : function (text) {
 		return prompt(text);
@@ -46,6 +48,19 @@ application.Screeen.prototype = {
 		for (var key in localStorage) {
 			this.addButtonField(key, { onclick : "new application.PlayHunt('" + key + "');"});
 		}
+	},
+	setStyleButton : function (btn) {
+		var style = btn.style;
+		style.width="100%";
+		style.height="55px";
+		style.fontSize="20px";
+	},
+	setStyleTextField : function (textfield) {
+		var style = textfield.style;
+		style.width="100%";
+		style.height="55px";
+		style.textAlign="center";
+		style.fontSize="20px";
 	}
 
 }

@@ -12,7 +12,7 @@ application.PlayHunt.prototype = {
 	showQuestion : function (indice) {
 		question = this.model.getQuestion(this.qCur);
 		screeen = new application.Screeen(this.nom);
-		screeen.addTextField("answer", {label : question.question, id : "answer"});
+		screeen.addTextField("answer", {label : question.question, hint: "Your answer", id : "answer"});
 		screeen.addButtonField("Validate", { onclick : "playThis.checkAnswer(question);" });
 		screeen.addButtonField('I give up!', { onclick : "playThis.giveUpHunt();" });
 	},
