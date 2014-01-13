@@ -17,6 +17,46 @@ test( "Questions", function() {
 
 	ok( question.question == q, "Setter question is ok" );
 	ok( question.answer == a, "Setter answer is ok" );
+
+	/* Test des exception */
+	/* question length is 0 */
+	q = ""
+	throws( 
+		function(){
+    		new application.Question(q,a);
+  		},
+  		'Created question with no field question raise exception'
+	);
+
+	/* answer length is 0 */
+	q = "Quelle est l'année de naissance de votre père?";
+	a = "";
+	throws( 
+		function(){
+    		new application.Question(q,a);
+  		},
+  		'Created question with no field answer raise exception'
+	);
+
+	/* question length is 0 and answer length is 0 */
+	q = ""
+		throws( 
+		function(){
+    		new application.Question(q,a);
+  		},
+  		'Created question with no field question and answer raise exception'
+	);
+
+	/* answer is not a number */
+	q = "Quelle est l'année de naissance de votre père?";
+	a = "answer is not a number";
+	q = ""
+		throws( 
+		function(){
+    		new application.Question(q,a);
+  		},
+  		'Created question with a not number answer raise exception'
+	);
 });
 
 

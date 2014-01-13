@@ -4,8 +4,16 @@ application.Question = function (question, answer) {
 	var _answer = answer;
 
 	/* Exception dans le cas ou la question est trop courte (<1) ou que la réponse n'est pas un nombre */
-	if (_question.length < 1) throw "Question length too short";
-	if (_answer.length < 1 || isNaN(_answer)) throw "Answer is not a number";
+	if (_question.length < 1) {
+		var err = new Error();
+		err.message = "Question length too short";
+		throw err;
+	}
+	if (_answer.length < 1 || isNaN(_answer)) {
+		var err = new Error();
+		err.message = "Answer is not a number";
+		throw err;
+	}
 
 	this.__defineGetter__("question", function () {return _question;});
 	this.__defineSetter__("question", function (value) {return _question = value;});
