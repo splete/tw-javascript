@@ -1,3 +1,5 @@
+
+
 application = {};
 
 /* Fonction permettant d'importer un fichier javascript : path */
@@ -19,7 +21,9 @@ importJSFile("screeen.js");
 
 /* C'est parti :) */
 window.onload = function () {
-	screeen=new application.Screeen("Treasure Hunt");
-	screeen.showCreationHunt();
-	screeen.showListHunt();
+	if(!window.location.pathname.contains("qunit-tests")) {
+		screeen=new application.Screeen("Treasure Hunt");
+		screeen.showCreationHunt();
+		screeen.showListHunt();
+	}
 }
