@@ -16,7 +16,7 @@ test( "Questions", function() {
 	question.answer = a;
 
 	ok( question.question == q, "Setter question is ok" );
-	ok( question.answer == a, "Setter answer is ok" );	
+	ok( question.answer == a, "Setter answer is ok" );
 });
 
 

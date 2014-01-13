@@ -58,5 +58,11 @@ application.HuntModel.prototype = {
 		jsonText += '}';
 
 		return jsonText;
+	},
+	showAllQuestions : function () {
+		for (var i=0; i<this.questions.length; i++) {
+			console.log("Question " + i + " : " + this.questions[i].question);
+			console.log("Answer " + i + " : " + this.questions[i].answer);
+		}
 	}
 }
