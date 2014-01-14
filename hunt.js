@@ -47,9 +47,7 @@ application.Hunt.prototype = {
 	finishHunt : function () {
 		console.log('Click finish');
 		huntthis.saveQuestion(false);
-		console.log('Enregistrer la chasse!')
-		//screeen.makeAlert('finish Hunt');
-		
+		console.log('Enregistrer la chasse!');
 
 		model.showAllQuestions();
 

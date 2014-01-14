@@ -46,7 +46,7 @@ application.Screeen.prototype = {
 	},
 	showListHunt : function () {
 		for (var key in localStorage) {
-			this.addButtonField(key, { onclick : "new application.PlayHunt('" + key + "');"});
+			this.addButtonField(key, { onclick : "new application.PlayHunt('" + key + "');", id : key});
 		}
 	},
 	setStyleButton : function (btn) {
