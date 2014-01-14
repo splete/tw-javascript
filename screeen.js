@@ -42,7 +42,7 @@ application.Screeen.prototype = {
 		alert(text);
 	},
 	showCreationHunt : function () {
-		this.addButtonField ("Create a Treasure Hunt", { onclick : "new application.Hunt()" });
+		this.addButtonField ("Create a Treasure Hunt", { onclick : "new application.Hunt()" , id : "creationbutton"});
 	},
 	showListHunt : function () {
 		for (var key in localStorage) {

@@ -53,6 +53,9 @@ application.ButtonField = function (conteneur, name, _parent, parameters) {
 
 	var buttonField=domHelp.addElement(newLine,"input","type","button");
 
+	if (parameters.id)
+		buttonField.setAttribute("id",parameters.id);
+
 	if (parameters.onclick) {
 		buttonField.addEventListener("click" , function () {
 			eval(parameters.onclick);
