@@ -13,8 +13,8 @@ application.PlayHunt.prototype = {
 		question = this.model.getQuestion(this.qCur);
 		screeen = new application.Screeen(this.nom);
 		screeen.addTextField("answer", {label : question.question, hint: "Your answer", id : "answer"});
-		screeen.addButtonField("Validate", { onclick : "playThis.checkAnswer(question);" });
-		screeen.addButtonField('I give up!', { onclick : "playThis.giveUpHunt();" });
+		screeen.addButtonField("Validate", { onclick : "playThis.checkAnswer(question);", id : "validate"});
+		screeen.addButtonField('I give up!', { onclick : "playThis.giveUpHunt();", id : "giveup" });
 	},
 	checkAnswer : function (question) {
 		var answer = document.getElementById('answer').value;
