@@ -1,13 +1,19 @@
 application.Hunt = function () {
 	huntthis = this;
 
-	this.name = this.setName();
-	/* On cré un model */
-	model = new application.HuntModel(this.name);
+	var _name = this.setName();
 
-	this.qNumber = 0;
-	console.log(this.name);
-	this.questions = {};
+	/* On cré un model */
+	var model = new application.HuntModel(_name);
+
+	/* Getter / Setter */
+	this.__defineGetter__("name", function () {return _name;});
+	this.__defineSetter__("name", function (value) {return _name = value;});
+
+	this.__defineGetter__("model", function () {return model;});
+	this.__defineSetter__("model", function (value) {return model = value;});
+	
+	/* Premmiere question... */
 	this.addQuestion();
 }
 
@@ -26,12 +32,10 @@ application.Hunt.prototype = {
 		var question = document.getElementById("question").value;
 		var answer = document.getElementById("answer").value;
 		var qSave = true;
-		console.log('On check les champs questions/réponses -> on ne fait rien si pas correct!');
 
 		try {
 			var questionM = new application.Question(question, answer);
-			model.addQuestion(questionM);
-			this.qNumber++;
+			this.model.addQuestion(questionM);
 
 		} catch (err) {
 			if (questionRequiered) {
@@ -40,24 +44,16 @@ application.Hunt.prototype = {
 		}
 	},
 	nextQuestion : function () {
-		console.log('Click next');
 		huntthis.saveQuestion(true);
 		huntthis.addQuestion();
 	},
 	finishHunt : function () {
-		console.log('Click finish');
 		huntthis.saveQuestion(false);
-		console.log('Enregistrer la chasse!');
 
-		model.showAllQuestions();
+		this.model.storeModel();
 
-		model.storeModel();
-
-		screeen = new application.Screeen("New Teasure Hunt");
+		screeen = new application.Screeen("Teasure Hunt");
 		screeen.showCreationHunt();
 		screeen.showListHunt();
-	},
-	toJson : function () {
-		return;
 	}
 }

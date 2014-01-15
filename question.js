@@ -1,5 +1,4 @@
 application.Question = function (question, answer) {
-	console.log('New object question');
 	var _question = question;
 	var _answer = answer;
 
@@ -15,6 +14,7 @@ application.Question = function (question, answer) {
 		throw err;
 	}
 
+	/* Getter / Setter */
 	this.__defineGetter__("question", function () {return _question;});
 	this.__defineSetter__("question", function (value) {return _question = value;});
 	this.__defineGetter__("answer", function () {return _answer;});

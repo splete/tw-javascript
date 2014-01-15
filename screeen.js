@@ -1,5 +1,5 @@
 application.Screeen = function (title) {
-	console.log('New screen');
+	/* Nouvel écran */
 	this.body=document.getElementsByTagName("body").item(0);
 	for (var i=0;this.body.childNodes.length;i++)
 		this.body.removeChild(this.body.childNodes.item(0));
@@ -29,11 +29,9 @@ application.Screeen.prototype = {
 	},
 	addTextField : function (name, parameters) {
 		this.fields[name]=new application.TextField(this, name, this.body,"text",parameters);
-		var style = this.fields[name].style;
 	},
 	addButtonField : function (name, parameters) {
 		this.fields[name]=new application.ButtonField(this, name, this.body,parameters);
-
 	},
 	getPrompt : function (text) {
 		return prompt(text);

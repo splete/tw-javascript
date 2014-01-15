@@ -1,16 +1,29 @@
 application.PlayHunt = function (nom) {
 	var json = JSON.parse(localStorage[nom]);
 	playThis = this;
-	this.nom = nom;
-	this.model = new application.HuntModel(nom, json);
-	this.nombreQuestion = this.model.getNbQuestions();
-	this.qCur = 0;
-	this.showQuestion(this.qCur);
+
+	var _nom = nom;
+	var model = new application.HuntModel(nom, json);
+
+	/* Getter / Setter */
+	this.__defineGetter__("nom", function () {return _nom;});
+	this.__defineSetter__("nom", function (value) {return _nom = value;});
+
+	this.__defineGetter__("model", function () {return model;});
+	this.__defineSetter__("model", function (value) {return model = value;});
+
+    /* Le nombre de question */
+	nombreQuestion = this.model.getNbQuestions();
+
+	/* La question courante */
+	qCur = 0;
+	
+	this.showQuestion(qCur);
 }
 
 application.PlayHunt.prototype = {
 	showQuestion : function (indice) {
-		question = this.model.getQuestion(this.qCur);
+		question = this.model.getQuestion(qCur);
 		screeen = new application.Screeen(this.nom);
 		screeen.addTextField("answer", {label : question.question, hint: "Your answer", id : "answer"});
 		screeen.addButtonField("Validate", { onclick : "playThis.checkAnswer(question);", id : "validate"});
@@ -19,16 +32,14 @@ application.PlayHunt.prototype = {
 	checkAnswer : function (question) {
 		var answer = document.getElementById('answer').value;
 		if (answer == question.answer) {
-			console.log('Bonne réponse');
-			this.qCur++;
+			qCur++;
 		} else {
-			console.log('Mauvaise réponse');
 			screeen.makeAlert('! :-( BAD ANSWER :-( !');
 		}
-		if (this.qCur == this.nombreQuestion) {
+		if (qCur == nombreQuestion) {
 			this.finishHunt();
 		} else {
-			this.showQuestion(this.qCur);
+			this.showQuestion(qCur);
 		}
 	},
 	finishHunt : function () {
