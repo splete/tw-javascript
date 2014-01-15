@@ -1,16 +1,26 @@
 application.Field = function () {
+	
+}
 
+application.Field.prototype = {
+	newLine : function (parent) {
+		return  domHelp.addElement(parent,"p");	
+	},
+	newLabel : function (parent) {
+		return domHelp.addElement(parent,"span");
+	}
 }
 
 
 application.TextField = function (conteneur, name, _parent, type, parameters) {
 	var _name = name;
 	var parent = _parent;
-	var newLine=domHelp.addElement(parent,"p");
+	var newLine = this.newLine(parent);
 	newLine.style.textAlign="center";
 
-	var label=domHelp.addElement(newLine,"span");
+	var label = this.newLabel(newLine);
 	label.style.fontSize="20px";
+
 	var labelText=domHelp.addText(label,(parameters.label?parameters.label:""));
 	//ttt=labelText;
 
@@ -42,14 +52,14 @@ application.TextField = function (conteneur, name, _parent, type, parameters) {
 	screeen.setStyleTextField(textField);
 }
 
-application.TextField.prototype = {
-
-}
+/* TextField hérite de Field */
+application.TextField.prototype = new application.Field();
+application.TextField.prototype.constructor = application.TextField;
 
 application.ButtonField = function (conteneur, name, _parent, parameters) {
 	var _name = name;
 	var parent = _parent;
-	var newLine=domHelp.addElement(parent,"p");
+	var newLine = this.newLine(parent);
 
 	var buttonField=domHelp.addElement(newLine,"input","type","button");
 
@@ -66,6 +76,6 @@ application.ButtonField = function (conteneur, name, _parent, parameters) {
 	screeen.setStyleButton(buttonField);
 }
 
-application.ButtonField.prototype = {
-
-}
+/* ButtonField hérite de Field */
+application.ButtonField.prototype = new application.Field();
+application.ButtonField.prototype.constructor = application.ButtonField;
