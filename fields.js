@@ -4,10 +4,23 @@ application.Field = function () {
 
 application.Field.prototype = {
 	newLine : function (parent) {
-		return  domHelp.addElement(parent,"p");	
+		var line = domHelp.addElement(parent,"p");	
+		line.style.textAlign="center";
+		return line;
 	},
 	newLabel : function (parent) {
-		return domHelp.addElement(parent,"span");
+		var label =  domHelp.addElement(parent,"span");
+		label.style.fontSize="20px";
+		return label;
+	}, 
+	setParameters : function (element, parameters) {
+		for(var key in parameters){
+			switch (key) {
+				case "hint" : element.setAttribute("placeholder",parameters.hint);
+				case "id" : element.setAttribute("id",parameters.id);
+				default : console.log(key + " : not set in Field")
+			}
+      	}
 	}
 }
 
@@ -16,19 +29,14 @@ application.TextField = function (conteneur, name, _parent, type, parameters) {
 	var _name = name;
 	var parent = _parent;
 	var newLine = this.newLine(parent);
-	newLine.style.textAlign="center";
 
 	var label = this.newLabel(newLine);
-	label.style.fontSize="20px";
 
 	var labelText=domHelp.addText(label,(parameters.label?parameters.label:""));
-	//ttt=labelText;
 
 	var textField=domHelp.addElement(newLine,"input","type",type);
-	if (parameters.hint)
-		textField.setAttribute("placeholder",parameters.hint);
-	if (parameters.id)
-		textField.setAttribute("id",parameters.id);
+	
+	this.setParameters(textField, parameters);
 	
 	var objetthis = this;
 
@@ -63,8 +71,7 @@ application.ButtonField = function (conteneur, name, _parent, parameters) {
 
 	var buttonField=domHelp.addElement(newLine,"input","type","button");
 
-	if (parameters.id)
-		buttonField.setAttribute("id",parameters.id);
+	this.setParameters(buttonField, parameters);
 
 	if (parameters.onclick) {
 		buttonField.addEventListener("click" , function () {
