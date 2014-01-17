@@ -3,6 +3,15 @@ application.Hunt = function () {
 
 	var _name = this.setName();
 
+	/* Si le nom n'est pas setter, on sort */
+	if (_name == undefined || _name.length < 1) return;
+
+	/* Si le nom est deja pris, on sort aussi... */
+	if (localStorage[_name] != undefined) {
+		screeen.makeAlert("This name is already in use");
+		return;
+	}
+
 	/* On cré un model */
 	var model = new application.HuntModel(_name);
 
@@ -50,7 +59,8 @@ application.Hunt.prototype = {
 	finishHunt : function () {
 		huntthis.saveQuestion(false);
 
-		this.model.storeModel();
+		if (this.model.getNbQuestions() > 0)
+			this.model.storeModel();
 
 		screeen = new application.Screeen("Teasure Hunt");
 		screeen.showCreationHunt();
